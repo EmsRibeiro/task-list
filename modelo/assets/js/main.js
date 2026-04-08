@@ -16,6 +16,8 @@ function saveTask() {
     taskText = taskText.replace("Apagar Missão", "").trim();
     taskArray.push(taskText);
   }
+
+  const tasksJSON = JSON.stringify(taskArray);
 }
 
 function createNewTask(taskInput) {
