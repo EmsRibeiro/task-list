@@ -12,12 +12,23 @@ function saveTask() {
   const taskArray = [];
 
   for (let task of allTasks) {
-    let taskText = inputNewTask.innerText;
+    let taskText = task.innerText;
     taskText = taskText.replace("Apagar Missão", "").trim();
     taskArray.push(taskText);
   }
 
   const tasksJSON = JSON.stringify(taskArray);
+  localStorage.setItem("Your task list", tasksJSON);
+}
+
+function addSavedTasks() {
+  const tasks = localStorage.getItem("Your task list"); // pega as tarefas em string no JSON
+  if (!tasks) return;
+  const tasksConverted = JSON.parse(tasks); // converte a string em array JSON
+
+  for (let task of tasksConverted) {
+    createNewTask(task);
+  }
 }
 
 function createNewTask(taskInput) {
@@ -26,6 +37,7 @@ function createNewTask(taskInput) {
   taskList.appendChild(li);
   cleanNewTask();
   createEraseBtn(li);
+  saveTask();
 }
 
 function cleanNewTask() {
@@ -57,5 +69,8 @@ document.addEventListener("click", (e) => {
   const el = e.target;
   if (el.classList.contains("erase")) {
     el.parentElement.remove();
+    saveTask();
   }
 });
+
+addSavedTasks();
