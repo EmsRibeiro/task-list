@@ -48,7 +48,7 @@ function cleanNewTask() {
 function createEraseBtn(li) {
   li.innerText += " ";
   const btnErase = document.createElement("button");
-  btnErase.innerText = "Apagar Missão";
+  btnErase.innerHTML = `<img src="./assets/img/parchment.png" alt="Um pergaminho estendido" class="img-erase-mission"> Apagar Missão`;
   btnErase.setAttribute("class", "erase");
   li.appendChild(btnErase);
 }
